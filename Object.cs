@@ -2,7 +2,11 @@
 using MoonSharp.Interpreter;
 using UnityEngine.EventSystems;
 
+/// <summary></summary>
 namespace uLua.Objects {
+    /// <summary>
+    /// 
+    /// </summary>
     [MoonSharpHideMember("IsParent")]
     [MoonSharpHideMember("Parent")]
     [MoonSharpHideMember("OnPointerClick")]
@@ -18,20 +22,27 @@ namespace uLua.Objects {
     [RequireComponent(typeof(Interactable))]
     [RequireComponent(typeof(RectTransform))]
     public abstract class Object : ExposedMonoBehaviour, IPointerDownHandler, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, ISubmitHandler, ICancelHandler, IDeselectHandler, ISelectHandler {
-        // Fields
+        #region Fields
 
+        /** <summary></summary> */
         private float TimePassed = 0f;
 
+        /** <summary></summary> */
         private RectTransform _RectTransform = null;
 
+        /** <summary></summary> */
         private Interactable _Interactable = null;
 
         private string _Value = "";
 
+        /** <summary></summary> */
         [System.NonSerialized] public bool HideOnStart = false;
 
-        // Access Methods
-        // Public
+        #endregion
+
+        #region Properties
+
+        #region Public
 
         public float Height {
             get { return Interactable.Height; }
@@ -131,7 +142,9 @@ namespace uLua.Objects {
             set { Interactable.Y = value; }
         }
 
-        // Protected
+        #endregion
+
+        #region Protected
 
         protected Interactable Interactable {
             get {
@@ -147,8 +160,13 @@ namespace uLua.Objects {
             }
         }
 
-        // Process Methods
-        // Public
+        #endregion
+
+        #endregion
+
+        #region Methods
+
+        #region Public
 
         public void Deselect() {
             Interactable.Deselect();
@@ -279,7 +297,9 @@ namespace uLua.Objects {
             Interactable.Toggle();
         }
 
-        // Protected
+        #endregion
+
+        #region Protected
 
         protected override void Start() {
             base.Start();
@@ -321,5 +341,9 @@ namespace uLua.Objects {
             if (Interactable.FadeFinished) InvokeLua("OnFadeFinish");
             if (Interactable.MovementFinished) InvokeLua("OnStop");
         }
+
+        #endregion
+
+        #endregion
     }
 }
